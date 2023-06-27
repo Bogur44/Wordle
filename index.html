@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="header">
+        <div class="menu">
+            <img src="./images/menu.png" alt="menu">
+        </div>
+        <div class="logo">Wordle</div>
+        <div class="buttons">
+            <div class="stats">
+                <img src="./images/statistics.png" alt="stats">
+            </div>
+            <div class="settings">
+                <img src="./images/setting.png" alt="settings">
+            </div>
+        </div>
+    </div>
+    <div class="chet"></div>
+    <div id="board">
+        <div class="row1 row">
+            <div class="row1box1 box"></div>
+            <div class="row1box2 box"></div>
+            <div class="row1box3 box"></div>
+            <div class="row1box4 box"></div>
+            <div class="row1box5 box"></div>
+        </div>
+        <div class="row2 row">
+            <div class="row2box1 box"></div>
+            <div class="row2box2 box"></div>
+            <div class="row2box3 box"></div>
+            <div class="row2box4 box"></div>
+            <div class="row2box5 box"></div>
+        </div>
+        <div class="row3 row">
+            <div class="row3box1 box"></div>
+            <div class="row3box2 box"></div>
+            <div class="row3box3 box"></div>
+            <div class="row3box4 box"></div>
+            <div class="row3box5 box"></div>
+        </div>
+        <div class="row4 row">
+            <div class="row4box1 box"></div>
+            <div class="row4box2 box"></div>
+            <div class="row4box3 box"></div>
+            <div class="row4box4 box"></div>
+            <div class="row4box5 box"></div>
+        </div>
+        <div class="row5 row">
+        <div class="row5box1 box"></div>
+        <div class="row5box2 box"></div>
+        <div class="row5box3 box"></div>
+        <div class="row5box4 box"></div>
+        <div class="row5box5 box"></div>
+        </div>
+        <div class="row6 row">
+        <div class="row6box1 box"></div>
+        <div class="row6box2 box"></div>
+        <div class="row6box3 box"></div>
+        <div class="row6box4 box"></div>
+        <div class="row6box5 box"></div>
+        </div>
+    </div>
+    <div class="keyboard" role="group" aria-label="Keyboard">
+        <div class="keyboard-row">
+            <button data-name="Q" onclick="writeLetter('q')" type="button" id="q" class="q key">Q</button>
+            <button onclick="writeLetter('w')" type="button" data-name="W" class="w key">W</button>
+            <button onclick="writeLetter('e')" type="button" data-name="E" class="e key">E</button>
+            <button onclick="writeLetter('r')" type="button" data-name="R" class="r key">R</button>
+            <button onclick="writeLetter('t')" type="button" data-name="T" class="t key">T</button>
+            <button onclick="writeLetter('y')" type="button" data-name="Y" class="y key">Y</button>
+            <button onclick="writeLetter('u')" type="button" data-name="U" class="u key">U</button>
+            <button onclick="writeLetter('i')" type="button" data-name="I" class="i key">I</button>
+            <button onclick="writeLetter('o')" type="button" data-name="O" class="o key">O</button>
+            <button onclick="writeLetter('p')" type="button" data-name="P" class="p key">P</button>
+        </div>
+        <div class="keyboard-row">
+            <div data-testid="spacer" class="Key-module_half__HooWu"></div>
+            <button onclick="writeLetter('a')" type="button" data-name="A" class="a key">A</button>
+            <button onclick="writeLetter('s')" type="button" data-name="S" class="s key">S</button>
+            <button onclick="writeLetter('d')" type="button" data-name="D" class="d key">D</button>
+            <button onclick="writeLetter('f')" type="button" data-name="F" class="f key">F</button>
+            <button onclick="writeLetter('g')" type="button" data-name="G" class="g key">G</button>
+            <button onclick="writeLetter('h')" type="button" data-name="H" class="h key">H</button>
+            <button onclick="writeLetter('j')" type="button" data-name="J" class="j key">J</button>
+            <button onclick="writeLetter('k')" type="button" data-name="K" class="k key">K</button>
+            <button onclick="writeLetter('l')" type="button" data-name="L" class="l key">L</button>
+            <div data-testid="spacer" class="Key-module_half__HooWu"></div>
+        </div>
+        <div class="keyboard-row">
+            <button onclick="enterWord()" type="button" id="↵" class="key enterKey">ENTER</button>
+            <button onclick="writeLetter('z')" type="button" data-name="Z" class="z key">Z</button>
+            <button onclick="writeLetter('x')" type="button" data-name="X" class="x key">X</button>
+            <button onclick="writeLetter('c')" type="button" data-name="C" class="c key">C</button>
+            <button onclick="writeLetter('v')" type="button" data-name="V" class="v key">V</button>
+            <button onclick="writeLetter('b')" type="button" data-name="B" class="b key">B</button>
+            <button onclick="writeLetter('n')" type="button" data-name="N" class="n key">N</button>
+            <button onclick="writeLetter('m')" type="button" data-name="M" class="m key">M</button>
+            <button onclick="deleteLetter()" type="button" id="←" aria-label="backspace" class="key removeKey"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" class="game-icon" data-testid="icon-backspace">
+                <path fill="var(--color-tone-1)" d="M22 3H7c-.69 0-1.23.35-1.59.88L0 12l5.41 8.11c.36.53.9.89 1.59.89h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H7.07L2.4 12l4.66-7H22v14zm-11.59-2L14 13.41 17.59 17 19 15.59 15.41 12 19 8.41 17.59 7 14 10.59 10.41 7 9 8.41 12.59 12 9 15.59z"></path>
+            </svg></button>
+        </div></div>
+<script>
+    const words = ["money", "power", "crane", "whale", "crane", "heard", "mouse", "micro", "state", "trunk", "drink", "speak", "start", "drunk",'abbey',
+"about",
+"above",
+"abuse",
+"admit",
+"adobe",
+"adopt",
+"adult",
+"after",
+"again",
+"agent",
+"aging",
+"agony",
+"agree",
+"ahead",
+"aisle",
+"alarm",
+"album",
+"alert",
+"alien",
+"align",
+"alike",
+"alive",
+"alley",
+"allow",
+"alloy",
+"alone",
+"along",
+"aloud",
+"alpha",
+"altar",
+"alter",
+"amber",
+"amend",
+"amino",
+"among",
+"ample",
+"angel",
+"amber",
+"angle",
+"angry",
+"ankle",
+"apart",
+"apple",
+"apply",
+"arena",
+"argue",
+"arise",
+"armor",
+"arose",
+"array",
+"arrow",
+"aside",
+"assay",
+"asset",
+"atlas",
+"audio",
+"audit",
+"avoid",
+"await",
+"award",
+"aware",
+"bacon",
+"badge",
+"badly",
+"baked",
+"baker",
+"baron",
+"bases",
+"basic",
+"basil",
+"basin",
+"beach",
+"beard",
+"beast",
+"began",
+"begin",
+"begun",
+"being",
+"belly",
+"below",
+"bench",
+"billy",
+"birth",
+"black",
+"blade",
+"blame",
+"blank",
+"blast",
+"bleak",
+"blend",
+"blind",
+"block",
+"bloom",
+"blown",
+"blues",
+"blunt",
+"board",
+"boast",
+"bonus",
+"boost",
+"booth",
+"borne",
+"bound",
+"bowel",
+"brain",
+"brake",
+"brand",
+"brass",
+"brave",
+"bread",
+"break",
+"breed",
+"brent",
+"bride",
+"brief",
+"bring",
+"brink",
+"broad",
+"broke",
+"brown",
+"brush",
+"build",
+"built",
+"bunch",
+"burke",
+"burnt",
+"burst",
+"buyer",
+"cabin",
+"cable",
+"cache",
+"calif",
+"canal",
+"candy",
+"canon",
+"cargo",
+"carol",
+"carry",
+"catch",
+"cater",
+"cause",
+"cease",
+"chain",
+"chair",
+"chalk",
+"chaos",
+"charm",
+"chart",
+"chase",
+"cheap",
+"check",
+"cheek",
+"cheer",
+"chess",
+"chest",
+"chick",
+"chief",
+"child",
+"chile",
+"chill",
+"china",
+"choir",
+"chose",
+"chuck",
+"cisco",
+"claim",
+"clash",
+"class",
+"clean",
+"clear",
+"clerk",
+"click",
+"cliff",
+"climb",
+"clock",
+"close",
+"cloth",
+"cloud",
+"coach",
+"coast",
+"colon",
+"color",
+"comic",
+"condo",
+"coral",
+"corps",
+"costa",
+"cough",
+"could",
+"count",
+"court",
+"cover",
+"crack",
+"craft",
+"crane",
+"crash",
+"cream",
+"creed",
+"creek",
+"crest",
+"cried",
+"cries",
+"crime",
+"crisp",
+"cross",
+"crowd",
+"crown",
+"crude",
+"cruel",
+"crush",
+"crust",
+"cubic",
+"curry",
+"curve",
+"cycle",
+"daily",
+"dairy",
+"daisy",
+"dance",
+"dated",
+"dealt",
+"death",
+"debit",
+"debut",
+"decay",
+"decor",
+"delay",
+"delta",
+"dense",
+"depot",
+"derby",
+"deter",
+"devil",
+"diary",
+"digit",
+"dirty",
+"dodge",
+"doing",
+"donor",
+"dozen",
+"draft",
+"drain",
+"drama",
+"drank",
+"drawn",
+"dream",
+"dress",
+"dried",
+"drift",
+"drill",
+"drink",
+"drive",
+"drove",
+"dusty",
+"dying",
+"eager",
+"eagle",
+"early",
+"earth",
+"eaten",
+"eight",
+"elbow",
+"elder",
+"elect",
+"elite",
+"empty",
+"enemy",
+"enjoy",
+"enter",
+"entry",
+"equal",
+"error",
+"essay",
+"ethic",
+"event",
+"every",
+"exact",
+"excel",
+"exert",
+"exile",
+"exist",
+"extra",
+"faint",
+"fairy",
+"faith",
+"false",
+"famed",
+"fancy",
+"fatal",
+"fatty",
+"fault",
+"feast",
+"fence",
+"ferry",
+"fetch",
+"fever",
+"fiber",
+"fibre",
+"field",
+"fiery",
+"fifth",
+"fifty",
+"fight",
+"final",
+"first",
+"fixed",
+"flame",
+"flash",
+"fleet",
+"flesh",
+"flies",
+"flint",
+"float",
+"flood",
+"floor",
+"flora",
+"flour",
+"flown",
+"fluid",
+"flung",
+"flush",
+"focal",
+"focus",
+"force",
+"forge",
+"forth",
+"forty",
+"forum",
+"found",
+"frame",
+"frank",
+"fraud",
+"fresh",
+"fried",
+"front",
+"frost",
+"fruit",
+"fully",
+"gauge",
+"genre",
+"ghost",
+"giant",
+"given",
+"glass",
+"globe",
+"glory",
+"glove",
+"going",
+"grace",
+"grade",
+"grain",
+"grams",
+"grand",
+"grant",
+"graph",
+"grasp",
+"grass",
+"grave",
+"great",
+"greed",
+"green",
+"greet",
+"grief",
+"gross",
+"group",
+"grove",
+"grown",
+"guard",
+"guess",
+"guest",
+"guide",
+"guild",
+"guilt",
+"habit",
+"handy",
+"hardy",
+"harry",
+"harsh",
+"hatch",
+"heart",
+"heath",
+"heavy",
+"hedge",
+"hello",
+"hence",
+"henry",
+"homer",
+"honey",
+"honor",
+"horse",
+"hotel",
+"house",
+"human",
+"ideal",
+"image",
+"imply",
+"incur",
+"index",
+"inner",
+"input",
+"Intel",
+"inter",
+"irony",
+"issue",
+"ivory",
+"jenny",
+"jewel",
+"joint",
+"jones",
+"judge",
+"juice",
+"known",
+"label",
+"labor",
+"laden",
+"lance",
+"large",
+"laser",
+"later",
+"laugh",
+"layer",
+"learn",
+"lease",
+"least",
+"leave",
+"legal",
+"lemon",
+"lever",
+"lewis",
+"light",
+"limit",
+"linen",
+"links",
+"liver",
+"lives",
+"lobby",
+"local",
+"lodge",
+"logic",
+"loose",
+"lotus",
+"lover",
+"lower",
+"loyal",
+"lucky",
+"lunch",
+"lying",
+"lynch",
+"magic",
+"major",
+"maker",
+"manor",
+"maple",
+"march",
+"maria",
+"marry",
+"marsh",
+"mason"
+]
+    const cheat = document.querySelector('.cheat')
+    const result = generateWord(words)
+    let score = 0;
+    let rowNum = 1
+    let boxNum = 1
+    let exactBox = 'row' + rowNum + 'box' + boxNum;
+    let letters = ['q','w','e','r','t','z','u','i','o','p','a','s','d','f','g','h','j','k','l','y','x','c','v','b','n','m']
+
+    document.addEventListener('keydown', (event) => {
+        let ltr = event.key;
+        const box = document.querySelector('.row' + rowNum + 'box'+ boxNum)
+        for(let i = 0; i < letters.length; i++){
+            let letter = letters[i]
+            if(ltr === letter && boxNum < 6){
+                writeLetter(ltr)
+            }
+        }
+            if(ltr === 'Backspace'){
+                deleteLetter()
+            }
+            if(ltr === 'Enter'){
+                enterWord()
+            }
+    },)
+
+    function writeLetter(ltr){
+        if(boxNum <= 5){
+            const box = document.querySelector('.row' + rowNum + 'box'+ boxNum)
+            boxNum += 1
+            box.textContent = ltr.toUpperCase();
+            box.classList.add('filled')
+        }
+        
+    }
+    function deleteLetter(){
+        if(boxNum >= 2){
+            boxNum--
+            const box = document.querySelector('.row' + rowNum + 'box'+ boxNum)
+            box.textContent = '';
+            box.classList.remove('filled')
+        }
+    }
+    function enterWord(){
+        if (boxNum < 6){
+            alert('Not enough letters')
+        }
+        let word1 = ''
+        if(boxNum === 6){
+            const origArr = []
+            boxNum = 1
+            for(let i = 1; i <= 5; i++){
+                const box = document.querySelector('.row' + rowNum + 'box'+ boxNum)
+                word1 = word1 + box.textContent
+                boxNum++
+            }
+            let origLtr = '';
+            let playerLtr = '';
+            function lettering(){
+            for(let i = 0; i < 5; i++){
+                origLtr = pickLetter(result, i).toUpperCase()
+                
+                origArr.push(origLtr)
+            }
+        }
+            lettering()
+            for(let i = 0; i < 5; i++){
+                playerLtr = pickLetter(word1, i)
+                const keyBox = document.querySelector("[data-name=" + playerLtr + "]")
+                    if(origArr.includes(playerLtr) ){
+                        const box = document.querySelector('.row' + rowNum + 'box' + (i + 1))
+                        box.classList.add('orange')
+                        keyBox.classList.add('orange')
+                    }
+                    if(!origArr.includes(playerLtr)){
+                        const box = document.querySelector('.row' + rowNum + 'box'+ (i + 1))
+                        box.classList.add('empty')
+                        keyBox.classList.add('empty')
+                    }
+                    if(origArr[i] === playerLtr){
+                        const box = document.querySelector('.row' + rowNum + 'box'+(i + 1))
+                        box.classList.remove('orange')
+                        box.classList.add('green')
+                        keyBox.classList.remove('orange')
+                        keyBox.classList.add('green')
+                        box.setAttribute('id', 'done')
+                    }
+                    checkWin(i)
+            }
+            score = 0
+            rowNum++
+            boxNum = 1
+        }
+    }
+
+function checkWin(i){
+    const box = document.querySelector('.row' + rowNum + 'box'+ (i + 1))
+    if(box.getAttribute('id') === 'done'){
+        score++
+        console.log(score)
+        if(score === 5){
+            alert('yeeees')
+        }
+    }
+}
+
+    function generateWord(arr){
+        const randomIndex = Math.floor(Math.random() * words.length)
+        const word = words[randomIndex]
+        return word
+    }
+
+    function pickLetter(string, index){
+        return string.charAt(index)
+    }
+
+    cheat.textContent = result
+</script>
+</body>
+</html>
